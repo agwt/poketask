@@ -1,13 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-choice',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './choice.component.html',
   styleUrl: './choice.component.scss',
 })
 export class ChoiceComponent {
-  public buttonClicked(): void {
-    console.log('clicked!');
+  @Input() options: string[] = [];
+  @Output() optionSelected = new EventEmitter<string>();
+
+  onOptionSelected(selectedOption: string): void {
+    this.optionSelected.emit(selectedOption);
   }
 }

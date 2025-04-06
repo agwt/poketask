@@ -1,4 +1,5 @@
-<button class="choice-button" (click)="buttonClicked()">Gengar</button>
-<button class="choice-button" (click)="buttonClicked()">Diglett</button>
-<button class="choice-button" (click)="buttonClicked()">Pikachu</button>
-<button class="choice-button" (click)="buttonClicked()">Squirtle</button>
+<div *ngFor="let option of options">
+  <button class="choice-button" (click)="onOptionSelected(option)">
+    {{ option }}
+  </button>
+</div>

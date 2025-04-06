@@ -25,11 +25,19 @@
 }
 
 .pokemon-display {
-    width:200px;
-    height:200px;
+    width:400px;
+    height:400px;
+    margin-right: 25vw;
+    margin-bottom: 20vh;
+
+    &.blacked-out-display {
+        filter: brightness(0);
+    }
 }
 
 .title-display {
+    min-width:400px;
     width:26vw;
+    min-height:200px;
     height:30vh;
 }

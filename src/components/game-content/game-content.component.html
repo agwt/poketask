@@ -2,10 +2,20 @@
   <img class="title-display" src="whosthattitle.png" />
   <div class="center-split">
     <div style="padding: 50px">
-      <img class="pokemon-display" src="pikachu.png" />
+      <img
+        [src]="
+          correctPokemon?.sprites?.other['official-artwork']?.front_default
+        "
+        [alt]="correctPokemon?.name"
+        class="pokemon-display"
+        [class.blacked-out-display]="imageHidden"
+      />
     </div>
-    <div style="padding: 50px">
-      <app-choice></app-choice>
+    <div>
+      <app-choice
+        [options]="options"
+        (optionSelected)="handleOptionSelected($event)"
+      ></app-choice>
     </div>
   </div>
 </div>

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class PokemonService {
+export class ApiService {
   private baseUrl = 'https://pokeapi.co/api/v2';
 
   constructor(private http: HttpClient) {}
