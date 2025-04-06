@@ -1,0 +1,32 @@
+:host {
+	display: flex;
+	flex-direction: column;
+}
+
+.choice-button {
+	box-shadow: 3px 4px 3px 0px #647787;
+	background:linear-gradient(to bottom, #f7f1b7 5%, #f7ff00 100%);
+	background-color:#f7f1b7;
+	border-radius:24px;
+	border:8px solid #045cb5;
+	display:inline-block;
+	cursor:pointer;
+	color:#132dad;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:13px 22px;
+	text-decoration:none;
+	margin:20px;
+}
+.choice-button:hover {
+	background:linear-gradient(to bottom, #f7ff00 5%, #f7f1b7 100%);
+	background-color:#f7ff00;
+    border: 8px solid #ce0000;
+}
+.choice-button:active {
+	position:relative;
+	top:3px;
+}
+
+     

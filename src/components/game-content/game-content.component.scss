@@ -1,0 +1,30 @@
+.title-text {
+    margin:50px;
+    font-family: "Arial Black", sans-serif;
+    font-size: 48px;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+    color: #00268f;
+    font-weight: 700;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-style: normal;
+    font-variant: small-caps;
+    text-transform: none;
+    text-shadow: #c8edf0 1px 1px 0px, #fcf77a 3px 3px 0px, 2px 2px 2px rgba(206,89,55,0);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.center-split {
+    display: flex;
+    flex-direction: row;
+}
+
+.pokemon-display {
+    width:200px;
+    height:200px;
+}
