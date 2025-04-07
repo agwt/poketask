@@ -15,6 +15,9 @@ export class GameContentComponent implements OnInit {
   artwork: any = '';
   fakePokemon: any[] = [];
 
+  gen: number = 0;
+  genText: String = 'Gen 1-4';
+
   options: any[] = [];
   roundEndMessage: String = 'New Pokemon encountered!';
 
@@ -51,8 +54,30 @@ export class GameContentComponent implements OnInit {
   }
 
   getRandomId(): number {
-    // First 4 gens only
-    return Math.floor(Math.random() * 493) + 1;
+    // First 4 gens only, I only really played up until Diamond/Pearl
+    let minDexEntry: number = 1;
+    let maxDexEntry: number = 493;
+    switch (this.gen) {
+      case 1:
+        minDexEntry = 1;
+        maxDexEntry = 151;
+        break;
+      case 2:
+        minDexEntry = 152;
+        maxDexEntry = 251;
+        break;
+      case 3:
+        minDexEntry = 252;
+        maxDexEntry = 386;
+        break;
+      case 4:
+        minDexEntry = 387;
+        maxDexEntry = 493;
+        break;
+      default:
+        break;
+    }
+    return Math.floor(Math.random() * maxDexEntry) + minDexEntry;
   }
 
   getRandomFakeIds(correctId: number, count: number): number[] {
@@ -74,6 +99,27 @@ export class GameContentComponent implements OnInit {
       this.score += 1;
     } else {
       this.roundEndMessage = `${this.correctPokemon?.name} ran away...`;
+    }
+  }
+
+  changeGen(): void {
+    this.gen = this.gen < 3 ? this.gen + 1 : 0;
+    switch (this.gen) {
+      case 1:
+        this.genText = 'Gen 1 only';
+        break;
+      case 2:
+        this.genText = 'Gen 2 only';
+        break;
+      case 3:
+        this.genText = 'Gen 3 only';
+        break;
+      case 4:
+        this.genText = 'Gen 4 only';
+        break;
+      default:
+        this.genText = 'Gen 1-4';
+        break;
     }
   }
 

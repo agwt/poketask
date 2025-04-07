@@ -9,9 +9,11 @@
         [class.blacked-out-display]="imageBlackedOut"
       />
       <app-game-controls
+        [genText]="genText"
         [roundEndMessage]="roundEndMessage"
         [score]="score"
         (newRoundSelected)="startNewRound()"
+        (newGenSelected)="changeGen()"
       ></app-game-controls>
     </div>
     <div>

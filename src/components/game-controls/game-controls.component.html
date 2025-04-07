@@ -4,6 +4,11 @@
     New Round
   </button>
 </div>
-<div class="content-box score">
-  <p class="game-controls-text">Pokemon Caught: {{ score }}</p>
+<div class="content-box score-gen">
+  <p class="game-controls-text">Caught: {{ score }}</p>
+  <div>
+    <button class="content-button gen-select" (click)="onNewGenSelected()">
+      {{ genText }}
+    </button>
+  </div>
 </div>
