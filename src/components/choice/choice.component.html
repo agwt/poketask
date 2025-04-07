@@ -1,5 +1,7 @@
-<div *ngFor="let option of options">
-  <button class="choice-button" (click)="onOptionSelected(option)">
-    {{ option }}
-  </button>
+<div class="choice-box">
+  <div *ngFor="let option of options">
+    <button class="choice-button" (click)="onOptionSelected(option)">
+      {{ option }}
+    </button>
+  </div>
 </div>

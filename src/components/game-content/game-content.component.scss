@@ -22,13 +22,12 @@
 .center-split {
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
 }
 
 .pokemon-display {
     width:400px;
     height:400px;
-    margin-right: 25vw;
-    margin-bottom: 20vh;
 
     &.blacked-out-display {
         filter: brightness(0);
