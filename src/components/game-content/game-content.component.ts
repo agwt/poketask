@@ -18,6 +18,9 @@ export class GameContentComponent implements OnInit {
   roundEndMessage: String = 'New Pokemon encountered!';
 
   imageBlackedOut: boolean = true;
+  choiceButtonsDisabled: boolean = false;
+
+  score: number = 0;
 
   constructor(private apiService: ApiService) {}
 
@@ -65,8 +68,10 @@ export class GameContentComponent implements OnInit {
 
   handleOptionSelected(selectedOption: string): void {
     this.imageBlackedOut = false;
+    this.choiceButtonsDisabled = true;
     if (selectedOption === this.correctPokemon?.name) {
       this.roundEndMessage = `${this.correctPokemon?.name} was caught!`;
+      this.score += 1;
     } else {
       this.roundEndMessage = `${this.correctPokemon?.name} ran away...`;
     }
@@ -75,5 +80,6 @@ export class GameContentComponent implements OnInit {
   resetRoundValues(): void {
     this.roundEndMessage = 'New Pokemon encountered!';
     this.imageBlackedOut = true;
+    this.choiceButtonsDisabled = false;
   }
 }

@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ChoiceComponent {
   @Input() options: string[] = [];
+  @Input() choiceButtonsDisabled: boolean = false;
   @Output() optionSelected = new EventEmitter<string>();
 
   onOptionSelected(selectedOption: string): void {

@@ -8,15 +8,19 @@
         class="pokemon-display"
         [class.blacked-out-display]="imageBlackedOut"
       />
-      <div class="content-box game-controls">
-        <p class="round-end-text">{{ roundEndMessage }}</p>
+      <div class="content-box round-result-layout">
+        <p class="game-controls-text">{{ roundEndMessage }}</p>
         <button class="content-button new-round" (click)="startNewRound()">
           New Round
         </button>
       </div>
+      <div class="content-box score">
+        <p class="game-controls-text">Pokemon Caught: {{ score }}</p>
+      </div>
     </div>
     <div>
       <app-choice
+        [choiceButtonsDisabled]="choiceButtonsDisabled"
         [options]="options"
         (optionSelected)="handleOptionSelected($event)"
       ></app-choice>
