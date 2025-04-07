@@ -63,7 +63,7 @@ export class GameContentComponent implements OnInit {
   }
 
   handleOptionSelected(selectedOption: string): void {
-    if (selectedOption === this.correctPokemon) {
+    if (selectedOption === this.correctPokemon?.name) {
       console.log('Correct');
     } else {
       console.log('Incorrect');
