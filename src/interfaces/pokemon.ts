@@ -1,7 +1,7 @@
 export interface Pokemon {
   id: number;
   name: string;
-  sprites: Sprites;
+  imageUrl: string;
 }
 
 export interface Sprites {

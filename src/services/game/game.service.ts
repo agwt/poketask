@@ -4,7 +4,7 @@ import { Status } from '../../enums/status';
 import { ApiService } from '../api/api.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { shareReplay } from 'rxjs';
-import { PokemonRef } from '../../interfaces/pokemon';
+import { Pokemon, PokemonRef } from '../../interfaces/pokemon';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +15,8 @@ export class GameService {
     this.apiService.getAllPokemonRefs().pipe(shareReplay(1)),
     { initialValue: [] }
   );
+
+  public readonly correctPokemon = signal<Pokemon | undefined>(undefined);
 
   private readonly defaultGeneration = Generation.All;
   public readonly generation = signal<Generation>(this.defaultGeneration);
@@ -31,8 +33,16 @@ export class GameService {
 
   public startNewRound(): void {
     this.status.set(this.defaultStatus);
-    const fourPokemon = this.getXPokemonRefs(this.pokemonRefs(), 4);
-    this.options.set(fourPokemon.map((p) => p.name));
+
+    const fourPokemonRefs = this.getXPokemonRefs(this.pokemonRefs(), 4);
+    const randomIndex = Math.floor(Math.random() * fourPokemonRefs.length);
+    const correctPokemonRef = fourPokemonRefs[randomIndex];
+
+    this.apiService
+      .getPokemon(correctPokemonRef.name)
+      .subscribe((p) => this.correctPokemon.set(p));
+
+    this.options.set(fourPokemonRefs.map((p) => p.name));
   }
 
   public selectGeneration(generation: Generation): void {

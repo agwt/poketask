@@ -3,7 +3,7 @@
   <div class="center-split">
     <div class="game-area">
       <img
-        [alt]="correctPokemon?.name"
+        [src]="correctPokemon()?.imageUrl"
         class="pokemon-display"
         [class.blacked-out-display]="guessing()"
       />
