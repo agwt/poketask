@@ -14,7 +14,7 @@ export class GameContentComponent implements OnInit {
   fakePokemon: any[] = [];
 
   options: any[] = [];
-  roundEndMessage: String = '';
+  roundEndMessage: String = 'New Pokemon encountered!';
 
   imageBlackedOut: boolean = true;
 
@@ -25,7 +25,7 @@ export class GameContentComponent implements OnInit {
   }
 
   startNewRound(): void {
-    this.imageBlackedOut = true;
+    this.resetRoundValues();
     const correctId = this.getRandomId();
     this.fetchCorrectPokemon(correctId);
 
@@ -35,8 +35,6 @@ export class GameContentComponent implements OnInit {
     forkJoin(fakeCalls).subscribe((fakes) => {
       this.options = [this.correctPokemon?.name, ...fakes.map((p) => p?.name)];
       this.options.sort(() => Math.random() - 0.5);
-
-      console.log(this.options);
     });
   }
 
@@ -65,9 +63,14 @@ export class GameContentComponent implements OnInit {
   handleOptionSelected(selectedOption: string): void {
     this.imageBlackedOut = false;
     if (selectedOption === this.correctPokemon?.name) {
-      this.roundEndMessage == `${this.correctPokemon?.name} was caught!`;
+      this.roundEndMessage = `${this.correctPokemon?.name} was caught!`;
     } else {
-      this.roundEndMessage == `${this.correctPokemon?.name} ran away...`;
+      this.roundEndMessage = `${this.correctPokemon?.name} ran away...`;
     }
+  }
+
+  resetRoundValues(): void {
+    this.roundEndMessage = 'New Pokemon encountered!';
+    this.imageBlackedOut = true;
   }
 }
