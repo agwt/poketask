@@ -28,8 +28,9 @@ html, body {
     }
 
     &.score {
-        justify-content: center;
-        min-width: 200px;
+        min-width: 250px;
+        max-width: 300px;
+        margin-top: 15px;
     }
 }
 

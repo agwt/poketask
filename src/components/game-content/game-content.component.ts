@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ChoiceComponent } from '../choice/choice.component';
 import { ApiService } from '../../services/pokemon.service';
 import { forkJoin } from 'rxjs';
+import { GameControlsComponent } from '../game-controls/game-controls.component';
 
 @Component({
   selector: 'app-game-content',
-  imports: [ChoiceComponent],
+  imports: [ChoiceComponent, GameControlsComponent],
   templateUrl: './game-content.component.html',
   styleUrl: './game-content.component.scss',
 })
