@@ -3,19 +3,14 @@
   <div class="center-split">
     <div class="game-area">
       <img
-        [src]="artwork"
         [alt]="correctPokemon?.name"
         class="pokemon-display"
-        [class.blacked-out-display]="imageBlackedOut"
+        [class.blacked-out-display]="guessing()"
       />
       <app-game-controls />
     </div>
     <div>
-      <app-choice
-        [choiceButtonsDisabled]="choiceButtonsDisabled"
-        [options]="options"
-        (optionSelected)="handleOptionSelected($event)"
-      />
+      <app-choice />
     </div>
   </div>
 </div>

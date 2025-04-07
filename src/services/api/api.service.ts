@@ -1,21 +1,26 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Pokemon, PokemonRef } from '../../interfaces/pokemon';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  private baseUrl = 'https://pokeapi.co/api/v2';
+  private readonly baseUrl = 'https://pokeapi.co/api/v2';
+  private readonly http = inject(HttpClient);
 
-  constructor(private http: HttpClient) {}
-
-  getPokemon(nameOrId: string | number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/pokemon/${nameOrId}`);
+  getPokemon(nameOrId: string | number): Observable<Pokemon | undefined> {
+    return this.http.get<Pokemon | undefined>(
+      `${this.baseUrl}/pokemon/${nameOrId}`
+    );
   }
 
-  getAllPokemon(limit: number = 493, offset: number = 0): Observable<any> {
-    return this.http.get(
+  getAllPokemonRefs(
+    limit: number = 493,
+    offset: number = 0
+  ): Observable<PokemonRef[]> {
+    return this.http.get<PokemonRef[]>(
       `${this.baseUrl}/pokemon?limit=${limit}&offset=${offset}`
     );
   }

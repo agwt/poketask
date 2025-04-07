@@ -1,6 +1,7 @@
 import { Component, computed, inject } from '@angular/core';
 import { GameService } from '../../services/game/game.service';
 import { Generation } from '../../enums/generation';
+import { Status } from '../../enums/status';
 
 @Component({
   selector: 'app-game-controls',
@@ -15,7 +16,17 @@ export class GameControlsComponent {
     this.getGenerationText(this.gameService.generation())
   );
   public readonly score = this.gameService.score;
-  public readonly roundEndMessage = this.gameService.roundEndMessage;
+
+  public readonly message = computed(() => {
+    switch (this.gameService.status()) {
+      case Status.Guess:
+        return 'New Pokemon Encountered!';
+      case Status.RevealCorrect:
+        return `TODO was caught!`;
+      case Status.RevealIncorrect:
+        return `TODO ran away...`;
+    }
+  });
 
   public readonly generations: Generation[] = [
     Generation.One,

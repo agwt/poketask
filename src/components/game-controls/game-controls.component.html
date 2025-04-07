@@ -1,11 +1,11 @@
 <div class="content-box round-result-layout">
-  <p class="game-controls-text">{{ roundEndMessage() }}</p>
+  <p class="game-controls-text">{{ message() }}</p>
   <button class="content-button new-round" (click)="startNewRound()">
     New Round
   </button>
+  <p class="game-controls-text">Caught: {{ score() }}</p>
 </div>
 <div class="content-box score-gen">
-  <p class="game-controls-text">Caught: {{ score() }}</p>
   <div>
     @for(generation of generations; track generation) {
     <button

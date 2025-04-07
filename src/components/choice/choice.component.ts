@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Status } from '../../enums/status';
+import { GameService } from '../../services/game/game.service';
 
 @Component({
   selector: 'app-choice',
@@ -8,11 +10,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './choice.component.scss',
 })
 export class ChoiceComponent {
-  @Input() options: string[] = [];
-  @Input() choiceButtonsDisabled: boolean = false;
-  @Output() optionSelected = new EventEmitter<string>();
+  private readonly gameService = inject(GameService);
 
-  onOptionSelected(selectedOption: string): void {
-    this.optionSelected.emit(selectedOption);
-  }
+  public readonly guessing = computed(
+    () => this.gameService.status() === Status.Guess
+  );
+  public readonly options = this.gameService.options;
 }

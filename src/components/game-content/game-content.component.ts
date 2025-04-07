@@ -1,10 +1,18 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { ChoiceComponent } from '../choice/choice.component';
 import { ApiService } from '../../services/api/api.service';
 import { forkJoin } from 'rxjs';
 import { GameControlsComponent } from '../game-controls/game-controls.component';
-import { Pokemon, Sprite } from '../../interfaces/pokemon';
+import { Pokemon } from '../../interfaces/pokemon';
 import { Generation } from '../../enums/generation';
+import { GameService } from '../../services/game/game.service';
+import { Status } from '../../enums/status';
 
 @Component({
   selector: 'app-game-content',
@@ -14,43 +22,29 @@ import { Generation } from '../../enums/generation';
 })
 export class GameContentComponent implements OnInit {
   correctPokemon?: Pokemon;
-  artwork?: Sprite;
   fakePokemon?: Pokemon[];
 
   gen: Generation = Generation.All;
 
   options: string[] = [];
-  roundEndMessage: string = 'New Pokemon encountered!';
 
-  imageBlackedOut: boolean = true;
   choiceButtonsDisabled: boolean = false;
 
   score: number = 0;
 
-  constructor(private apiService: ApiService) {}
+  public readonly guessing = computed(
+    () => this.gameService.status() === Status.Guess
+  );
 
-  ngOnInit(): void {
-    this.startNewRound();
-  }
+  private readonly gameService = inject(GameService);
+  private readonly apiService = inject(ApiService);
 
-  startNewRound(): void {
-    this.resetRoundValues();
-    const correctId = this.getRandomId();
-    this.fetchCorrectPokemon(correctId);
-
-    const fakeIds = this.getRandomFakeIds(correctId, 3);
-    const fakeCalls = fakeIds.map((id) => this.apiService.getPokemon(id));
-
-    forkJoin(fakeCalls).subscribe((fakes) => {
-      this.options = [this.correctPokemon?.name, ...fakes.map((p) => p?.name)];
-      this.options.sort(() => Math.random() - 0.5);
-    });
-  }
+  ngOnInit(): void {}
 
   async fetchCorrectPokemon(id: number): Promise<void> {
     this.apiService.getPokemon(id).subscribe((p) => {
       this.correctPokemon = p;
-      this.artwork = p?.sprites?.other['official-artwork']?.front_default;
+      //this.artwork = p?.sprites.other['official-artwork'].front_default;
     });
   }
 
@@ -63,23 +57,6 @@ export class GameContentComponent implements OnInit {
       }
     }
     return idList;
-  }
-
-  handleOptionSelected(selectedOption: string): void {
-    this.imageBlackedOut = false;
-    this.choiceButtonsDisabled = true;
-    if (selectedOption === this.correctPokemon?.name) {
-      this.roundEndMessage = `${this.correctPokemon?.name} was caught!`;
-      this.score += 1;
-    } else {
-      this.roundEndMessage = `${this.correctPokemon?.name} ran away...`;
-    }
-  }
-
-  resetRoundValues(): void {
-    this.roundEndMessage = 'New Pokemon encountered!';
-    this.imageBlackedOut = true;
-    this.choiceButtonsDisabled = false;
   }
 
   getRandomId(): number {
