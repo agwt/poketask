@@ -1,11 +1,11 @@
 <div class="content-box">
-  <div *ngFor="let option of options">
-    <button
-      class="content-button"
-      [disabled]="choiceButtonsDisabled"
-      (click)="onOptionSelected(option)"
-    >
-      {{ option }}
-    </button>
-  </div>
+  @for(option of options; track option) {
+  <button
+    class="content-button"
+    [disabled]="choiceButtonsDisabled"
+    (click)="onOptionSelected(option)"
+  >
+    {{ option }}
+  </button>
+  }
 </div>

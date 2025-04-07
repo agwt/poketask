@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ChoiceComponent } from '../choice/choice.component';
-import { ApiService } from '../../services/pokemon.service';
+import { ApiService } from '../../services/api/api.service';
 import { forkJoin } from 'rxjs';
 import { GameControlsComponent } from '../game-controls/game-controls.component';
+import { Pokemon, Sprite } from '../../interfaces/pokemon';
+import { Generation } from '../../enums/generation';
 
 @Component({
   selector: 'app-game-content',
@@ -11,15 +13,14 @@ import { GameControlsComponent } from '../game-controls/game-controls.component'
   styleUrl: './game-content.component.scss',
 })
 export class GameContentComponent implements OnInit {
-  correctPokemon: any;
-  artwork: any = '';
-  fakePokemon: any[] = [];
+  correctPokemon?: Pokemon;
+  artwork?: Sprite;
+  fakePokemon?: Pokemon[];
 
-  gen: number = 0;
-  genText: String = 'Gen 1-4';
+  gen: Generation = Generation.All;
 
-  options: any[] = [];
-  roundEndMessage: String = 'New Pokemon encountered!';
+  options: string[] = [];
+  roundEndMessage: string = 'New Pokemon encountered!';
 
   imageBlackedOut: boolean = true;
   choiceButtonsDisabled: boolean = false;
@@ -53,33 +54,6 @@ export class GameContentComponent implements OnInit {
     });
   }
 
-  getRandomId(): number {
-    // First 4 gens only, I only really played up until Diamond/Pearl
-    let minDexEntry: number = 1;
-    let maxDexEntry: number = 493;
-    switch (this.gen) {
-      case 1:
-        minDexEntry = 1;
-        maxDexEntry = 151;
-        break;
-      case 2:
-        minDexEntry = 152;
-        maxDexEntry = 251;
-        break;
-      case 3:
-        minDexEntry = 252;
-        maxDexEntry = 386;
-        break;
-      case 4:
-        minDexEntry = 387;
-        maxDexEntry = 493;
-        break;
-      default:
-        break;
-    }
-    return Math.floor(Math.random() * maxDexEntry) + minDexEntry;
-  }
-
   getRandomFakeIds(correctId: number, count: number): number[] {
     const idList: number[] = [];
     while (idList.length < count) {
@@ -102,30 +76,36 @@ export class GameContentComponent implements OnInit {
     }
   }
 
-  changeGen(): void {
-    this.gen = this.gen < 3 ? this.gen + 1 : 0;
-    switch (this.gen) {
-      case 1:
-        this.genText = 'Gen 1 only';
-        break;
-      case 2:
-        this.genText = 'Gen 2 only';
-        break;
-      case 3:
-        this.genText = 'Gen 3 only';
-        break;
-      case 4:
-        this.genText = 'Gen 4 only';
-        break;
-      default:
-        this.genText = 'Gen 1-4';
-        break;
-    }
-  }
-
   resetRoundValues(): void {
     this.roundEndMessage = 'New Pokemon encountered!';
     this.imageBlackedOut = true;
     this.choiceButtonsDisabled = false;
+  }
+
+  getRandomId(): number {
+    // First 4 gens only, I only really played up until Diamond/Pearl
+    let minDexEntry: number = 1;
+    let maxDexEntry: number = 493;
+    switch (this.gen) {
+      case Generation.One:
+        minDexEntry = 1;
+        maxDexEntry = 151;
+        break;
+      case Generation.Two:
+        minDexEntry = 152;
+        maxDexEntry = 251;
+        break;
+      case Generation.Three:
+        minDexEntry = 252;
+        maxDexEntry = 386;
+        break;
+      case Generation.Four:
+        minDexEntry = 387;
+        maxDexEntry = 493;
+        break;
+      default:
+        break;
+    }
+    return Math.floor(Math.random() * maxDexEntry) + minDexEntry;
   }
 }

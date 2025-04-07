@@ -14,9 +14,9 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/pokemon/${nameOrId}`);
   }
 
-  // getAllPokemon(limit: number = 493, offset: number = 0): Observable<any> {
-  //   return this.http.get(
-  //     `${this.baseUrl}/pokemon?limit=${limit}&offset=${offset}`
-  //   );
-  // }
+  getAllPokemon(limit: number = 493, offset: number = 0): Observable<any> {
+    return this.http.get(
+      `${this.baseUrl}/pokemon?limit=${limit}&offset=${offset}`
+    );
+  }
 }
