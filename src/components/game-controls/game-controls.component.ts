@@ -9,9 +9,9 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class GameControlsComponent {
   @Input() roundEndMessage: String = '';
   @Input() score: number = 0;
-  @Output() newRound = new EventEmitter<void>();
+  @Output() newRoundSelected = new EventEmitter<void>();
 
-  newRoundSelected() {
-    this.newRound.emit();
+  onNewRoundSelected() {
+    this.newRoundSelected.emit();
   }
 }

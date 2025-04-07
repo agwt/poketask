@@ -29,10 +29,10 @@ export class GameContentComponent implements OnInit {
     this.startNewRound();
   }
 
-  async startNewRound(): Promise<void> {
+  startNewRound(): void {
     this.resetRoundValues();
     const correctId = this.getRandomId();
-    await this.fetchCorrectPokemon(correctId);
+    this.fetchCorrectPokemon(correctId);
 
     const fakeIds = this.getRandomFakeIds(correctId, 3);
     const fakeCalls = fakeIds.map((id) => this.apiService.getPokemon(id));
@@ -46,8 +46,7 @@ export class GameContentComponent implements OnInit {
   async fetchCorrectPokemon(id: number): Promise<void> {
     this.apiService.getPokemon(id).subscribe((p) => {
       this.correctPokemon = p;
-      this.artwork =
-        this.correctPokemon?.sprites?.other['official-artwork']?.front_default;
+      this.artwork = p?.sprites?.other['official-artwork']?.front_default;
     });
   }
 
