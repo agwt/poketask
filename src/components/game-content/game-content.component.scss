@@ -40,3 +40,9 @@
     min-height:200px;
     height:30vh;
 }
+
+.game-area {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}

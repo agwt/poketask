@@ -14,8 +14,9 @@ export class GameContentComponent implements OnInit {
   fakePokemon: any[] = [];
 
   options: any[] = [];
+  roundEndMessage: String = '';
 
-  imageHidden: boolean = true;
+  imageBlackedOut: boolean = true;
 
   constructor(private apiService: ApiService) {}
 
@@ -24,6 +25,7 @@ export class GameContentComponent implements OnInit {
   }
 
   startNewRound(): void {
+    this.imageBlackedOut = true;
     const correctId = this.getRandomId();
     this.fetchCorrectPokemon(correctId);
 
@@ -36,8 +38,6 @@ export class GameContentComponent implements OnInit {
 
       console.log(this.options);
     });
-
-    this.imageHidden = true;
   }
 
   fetchCorrectPokemon(id: number): void {
@@ -63,10 +63,11 @@ export class GameContentComponent implements OnInit {
   }
 
   handleOptionSelected(selectedOption: string): void {
+    this.imageBlackedOut = false;
     if (selectedOption === this.correctPokemon?.name) {
-      console.log('Correct');
+      this.roundEndMessage == `${this.correctPokemon?.name} was caught!`;
     } else {
-      console.log('Incorrect');
+      this.roundEndMessage == `${this.correctPokemon?.name} ran away...`;
     }
   }
 }

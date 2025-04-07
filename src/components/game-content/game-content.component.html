@@ -1,15 +1,19 @@
 <div class="container">
   <img class="title-display" src="whosthattitle.png" />
   <div class="center-split">
-    <div>
+    <div class="game-area">
       <img
         [src]="
           correctPokemon?.sprites?.other['official-artwork']?.front_default
         "
         [alt]="correctPokemon?.name"
         class="pokemon-display"
-        [class.blacked-out-display]="imageHidden"
+        [class.blacked-out-display]="imageBlackedOut"
       />
+      <div class="content-box game-controls">
+        <p>{{ roundEndMessage }}</p>
+        <button (click)="startNewRound()">New Round</button>
+      </div>
     </div>
     <div>
       <app-choice
