@@ -11,6 +11,7 @@ import { forkJoin } from 'rxjs';
 })
 export class GameContentComponent implements OnInit {
   correctPokemon: any;
+  artwork: any = '';
   fakePokemon: any[] = [];
 
   options: any[] = [];
@@ -24,10 +25,10 @@ export class GameContentComponent implements OnInit {
     this.startNewRound();
   }
 
-  startNewRound(): void {
+  async startNewRound(): Promise<void> {
     this.resetRoundValues();
     const correctId = this.getRandomId();
-    this.fetchCorrectPokemon(correctId);
+    await this.fetchCorrectPokemon(correctId);
 
     const fakeIds = this.getRandomFakeIds(correctId, 3);
     const fakeCalls = fakeIds.map((id) => this.apiService.getPokemon(id));
@@ -38,9 +39,11 @@ export class GameContentComponent implements OnInit {
     });
   }
 
-  fetchCorrectPokemon(id: number): void {
+  async fetchCorrectPokemon(id: number): Promise<void> {
     this.apiService.getPokemon(id).subscribe((p) => {
       this.correctPokemon = p;
+      this.artwork =
+        this.correctPokemon?.sprites?.other['official-artwork']?.front_default;
     });
   }
 
@@ -57,7 +60,7 @@ export class GameContentComponent implements OnInit {
         idList.push(fakeId);
       }
     }
-    return [...idList];
+    return idList;
   }
 
   handleOptionSelected(selectedOption: string): void {
