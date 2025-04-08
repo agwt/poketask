@@ -1,14 +1,10 @@
 <img class="title-display" src="whosthattitle.png" />
-<div class="center-split">
-  <div class="game-area">
-    <img
-      [src]="correctPokemon()?.imageUrl"
-      class="pokemon-display"
-      [class.blacked-out-display]="guessing()"
-    />
-    <app-game-controls />
-  </div>
-  <div>
-    <app-choice />
-  </div>
+<div class="game-area">
+  <img
+    [src]="correctPokemon()?.imageUrl"
+    class="pokemon-display"
+    [class.blacked-out-display]="guessing()"
+  />
+  <app-choice />
 </div>
+<app-game-controls />

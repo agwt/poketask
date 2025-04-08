@@ -2,33 +2,26 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
 
-    .center-split {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
+.game-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 
-        .game-area {
-            display:flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+.pokemon-display {
+    width:400px;
+    height:400px;
+
+    &.blacked-out-display {
+        filter: brightness(0);
     }
-    
-    .pokemon-display {
-        width:400px;
-        height:400px;
-    
-        &.blacked-out-display {
-            filter: brightness(0);
-        }
-    }
-    
-    .title-display {
-        min-width:400px;
-        width:26vw;
-        min-height:200px;
-        height:30vh;
-    }
-    
+}
+
+.title-display {
+    min-width:400px;
+    width:26vw;
+    min-height:200px;
+    height:30vh;
 }
