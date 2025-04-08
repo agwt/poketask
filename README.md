@@ -90,11 +90,11 @@ This project uses Angular signals to manage the game state. Signals maintain sta
 Examples:
 ```bash
 List of all fetched Pokemon
-Current Pokemon   (correct + fake answers)
-Game status       # guessing, correct, incorrect
+Current Pokemon
+Game status
 Generations selected
 Score
-Highscore         (then stored in localStorage)
+Highscore
 ```
 
 ## Screenshots
