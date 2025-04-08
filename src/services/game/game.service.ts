@@ -11,10 +11,7 @@ import { Pokemon, PokemonRef } from '../../interfaces/pokemon';
 })
 export class GameService {
   private readonly apiService = inject(ApiService);
-  private readonly pokemonRefs = toSignal(
-    this.apiService.getAllPokemonRefs().pipe(shareReplay(1)),
-    { initialValue: [] }
-  );
+  private readonly pokemonRefs = signal<PokemonRef[]>([]);
 
   public readonly correctPokemon = signal<Pokemon | undefined>(undefined);
 
@@ -26,6 +23,13 @@ export class GameService {
 
   public readonly options = signal<string[]>([]);
   public readonly score = signal<number>(0);
+
+  constructor() {
+    this.apiService.getAllPokemonRefs().subscribe((refs) => {
+      this.pokemonRefs.set(refs);
+      this.startNewRound();
+    });
+  }
 
   private getXPokemonRefs(list: PokemonRef[], count: number): PokemonRef[] {
     return [...list].sort(() => Math.random() - 0.5).slice(0, count);
@@ -47,5 +51,12 @@ export class GameService {
 
   public selectGeneration(generation: Generation): void {
     this.generation.set(generation);
+  }
+
+  public chooseOption(option: string): void {
+    const correctName = this.correctPokemon()?.name;
+    if (!correctName) return;
+    const matches = correctName === option;
+    this.status.set(matches ? Status.RevealCorrect : Status.RevealIncorrect);
   }
 }

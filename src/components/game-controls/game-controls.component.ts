@@ -18,14 +18,14 @@ export class GameControlsComponent {
   public readonly score = this.gameService.score;
 
   public readonly message = computed(() => {
-    switch (this.gameService.status()) {
-      case Status.Guess:
-        return 'New Pokemon Encountered!';
-      case Status.RevealCorrect:
-        return `TODO was caught!`;
-      case Status.RevealIncorrect:
-        return `TODO ran away...`;
-    }
+    const correctPokemon = this.gameService.correctPokemon();
+    const status = this.gameService.status();
+    if (status === Status.Guess) return 'New Pokemon Encountered!';
+    if (!correctPokemon) return '';
+    const name = correctPokemon.name;
+    return status === Status.RevealCorrect
+      ? `${name} was caught!`
+      : `${name} ran away...`;
   });
 
   public readonly generations: Generation[] = [

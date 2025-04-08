@@ -1,6 +1,10 @@
 <div class="content-box">
-  @for(option of options(); track option) {
-  <button class="content-button" [disabled]="!guessing()">
+  @for(option of options(); track $index) {
+  <button
+    class="content-button"
+    [disabled]="!guessing()"
+    (click)="chooseOption(option)"
+  >
     {{ option }}
   </button>
   }

@@ -16,4 +16,8 @@ export class ChoiceComponent {
     () => this.gameService.status() === Status.Guess
   );
   public readonly options = this.gameService.options;
+
+  public chooseOption(option: string) {
+    this.gameService.chooseOption(option);
+  }
 }
