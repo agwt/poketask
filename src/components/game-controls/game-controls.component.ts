@@ -1,4 +1,9 @@
-import { Component, computed, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+} from '@angular/core';
 import { GameService } from '../../services/game/game.service';
 import { Generation } from '../../enums/generation';
 import { Status } from '../../enums/status';
@@ -8,6 +13,7 @@ import { Status } from '../../enums/status';
   imports: [],
   templateUrl: './game-controls.component.html',
   styleUrl: './game-controls.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GameControlsComponent {
   private readonly gameService = inject(GameService);
