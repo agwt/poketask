@@ -39,7 +39,7 @@ Features:
 Clone the repository:
 
 ```bash
- git clone https://github.com/agwt/poketask.git
+git clone https://github.com/agwt/poketask.git
 ```
 Install dependencies:
 
