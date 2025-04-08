@@ -6,6 +6,7 @@ Features:
 - TypeScript
 - Signals
 - RxJS
+- Local storage
 - SCSS
 
 ## Project Structure
@@ -82,3 +83,11 @@ For end-to-end (e2e) testing, run:
 ```bash
 ng e2e
 ```
+
+## Screenshots
+
+![image](https://github.com/user-attachments/assets/ca2df0f5-ceab-4da2-b320-e97d2166ab96)
+
+![image](https://github.com/user-attachments/assets/7ae7a7a3-cabe-49ad-9f20-f89a806e09e1)
+
+
