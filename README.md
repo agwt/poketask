@@ -31,12 +31,15 @@ Features:
 │ ├── main
 │ └── styles
 ```
+
+## Installation
+
 ### Prerequisites
 
 - Node.js
 - Angular CLI (`npm install -g @angular/cli`)
 
-### Installation
+### Install
 
 Clone the repository:
 
@@ -49,7 +52,7 @@ Install dependencies:
 npm install
 ```
 
-## Development server
+### Development server
 
 To start a local development server, run:
 
@@ -59,7 +62,7 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`, or use the `--open` modifier. The application will automatically reload whenever you modify any of the source files.
 
-## Building
+### Building
 
 To build the project run:
 
@@ -69,7 +72,7 @@ ng build
 
 This will compile your project and store the build artifacts in the `dist/` directory.
 
-## Running unit tests
+### Running unit tests
 
 To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
 
@@ -77,7 +80,7 @@ To execute unit tests with the [Karma](https://karma-runner.github.io) test runn
 ng test
 ```
 
-## Running end-to-end tests
+### Running end-to-end tests
 
 For end-to-end (e2e) testing, run:
 
