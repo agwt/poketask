@@ -2,7 +2,7 @@
 
 A simple game built using [Angular 19](https://angular.io/) where users guess the name of a hidden Pokemon, similar to the "Who's That Pokemon" segment of the anime.
 
-Other features:
+Features:
 - TypeScript
 - Signals
 - RxJS
@@ -23,8 +23,8 @@ Other features:
 │ ├── interfaces/ 
 │ │ └── pokemon
 │ ├── services/ 
-│ │ ├── api # Fetches data from pokeapi
-│ │ └── game # Handles game state
+│ │ ├── api      # Fetches data from pokeapi
+│ │ └── game     # Handles game state
 │ ├── index
 │ ├── main
 │ └── styles
