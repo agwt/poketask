@@ -15,6 +15,5 @@ export class GameContentComponent {
   private readonly gameService = inject(GameService);
 
   public readonly guessing = this.gameService.guessing;
-
   public readonly correctPokemon = this.gameService.correctPokemon;
 }

@@ -19,10 +19,10 @@ export class GameControlsComponent {
   private readonly gameService = inject(GameService);
 
   public readonly activeGeneration = this.gameService.generation;
-
   public readonly generationText = computed(() =>
     this.getGenerationText(this.activeGeneration())
   );
+
   public readonly score = this.gameService.score;
   public readonly highScore = this.gameService.highScore;
 
