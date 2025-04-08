@@ -18,6 +18,7 @@ export class GameControlsComponent {
     this.getGenerationText(this.activeGeneration())
   );
   public readonly score = this.gameService.score;
+  public readonly highScore = this.gameService.highScore;
 
   public readonly guessing = this.gameService.guessing;
 

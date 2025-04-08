@@ -2,8 +2,6 @@ import { computed, inject, Injectable, signal } from '@angular/core';
 import { Generation } from '../../enums/generation';
 import { Status } from '../../enums/status';
 import { ApiService } from '../api/api.service';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { shareReplay } from 'rxjs';
 import { Pokemon, PokemonRef } from '../../interfaces/pokemon';
 
 @Injectable({
@@ -25,6 +23,8 @@ export class GameService {
 
   public readonly options = signal<string[]>([]);
   public readonly score = signal<number>(0);
+
+  public readonly highScore = signal<number>(0);
 
   constructor() {
     this.apiService.getAllPokemonRefs().subscribe((refs) => {
@@ -61,6 +61,8 @@ export class GameService {
     const matches = correctName === option;
     this.status.set(matches ? Status.RevealCorrect : Status.RevealIncorrect);
     this.score.update((score) => (score = matches ? score + 1 : 0));
+    const newScore = this.score();
+    if (newScore > this.highScore()) this.highScore.set(newScore);
   }
 
   private getXPokemonRefs(list: PokemonRef[], count: number): PokemonRef[] {

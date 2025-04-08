@@ -7,15 +7,18 @@
   >
     New Round
   </button>
-  <p class="game-controls-text caught">Caught: {{ score() }}</p>
+  <div class="score-display">
+    <p class="game-controls-text caught">Caught: {{ score() }}</p>
+    <p class="game-controls-text caught">Highscore: {{ highScore() }}</p>
+  </div>
 </div>
-<div class="content-box score-gen">
+<div class="content-box gen-box">
   <div>
     @for(generation of generations; track generation) {
     <button
       class="content-button gen-select"
       [class.selected]="generation === activeGeneration()"
-      [disabled]="guessing() && score() > 0"
+      [disabled]="guessing()"
       (click)="selectGeneration(generation)"
     >
       {{ getGenerationText(generation) }}
