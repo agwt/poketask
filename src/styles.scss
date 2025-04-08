@@ -25,7 +25,7 @@ html, body {
 
     min-width: 200px;
 
-    color: #000000;
+    color: #000;
     font-size: medium;
 
     &.round-result-layout {
@@ -52,7 +52,7 @@ html, body {
     font-family: cursive;
     border: 6px solid #000;
     border-radius: 20px;
-    box-shadow: -5px 7px 0px 0px rgba(0, 0, 0, 0.3607843137);
+    box-shadow: -5px 7px 0px 0px rgba(0, 0, 0, 0.35);
     color: #000;
     font-size: 20px;
     font-weight: bold;
