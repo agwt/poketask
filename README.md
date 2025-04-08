@@ -9,7 +9,7 @@ Other features:
 - SCSS
 
 # Project Structure
-
+```
 ├── public/ 
 ├── src/ 
 │ ├── app/ 
@@ -28,7 +28,7 @@ Other features:
 │ ├── index
 │ ├── main
 │ └── styles
-
+```
 ## Development server
 
 To start a local development server, run:
