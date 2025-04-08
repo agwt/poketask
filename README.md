@@ -80,14 +80,6 @@ To execute unit tests with the [Karma](https://karma-runner.github.io) test runn
 ng test
 ```
 
-### Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
 ## Signals
 This project uses Angular signals to manage the game state. Signals maintain state across components and update reactively - meaning that there is less reliance on RxJS as the application's state is entirely managed and updated through the use of signals.
 Examples:
