@@ -12,10 +12,14 @@ import { Status } from '../../enums/status';
 export class GameControlsComponent {
   private readonly gameService = inject(GameService);
 
+  public readonly activeGeneration = this.gameService.generation;
+
   public readonly generationText = computed(() =>
-    this.getGenerationText(this.gameService.generation())
+    this.getGenerationText(this.activeGeneration())
   );
   public readonly score = this.gameService.score;
+
+  public readonly guessing = this.gameService.guessing;
 
   public readonly message = computed(() => {
     const correctPokemon = this.gameService.correctPokemon();

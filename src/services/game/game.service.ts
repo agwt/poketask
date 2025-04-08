@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import { Generation } from '../../enums/generation';
 import { Status } from '../../enums/status';
 import { ApiService } from '../api/api.service';
@@ -21,6 +21,8 @@ export class GameService {
   private readonly defaultStatus = Status.Guess;
   public readonly status = signal<Status>(this.defaultStatus);
 
+  public readonly guessing = computed(() => this.status() === Status.Guess);
+
   public readonly options = signal<string[]>([]);
   public readonly score = signal<number>(0);
 
@@ -31,14 +33,14 @@ export class GameService {
     });
   }
 
-  private getXPokemonRefs(list: PokemonRef[], count: number): PokemonRef[] {
-    return [...list].sort(() => Math.random() - 0.5).slice(0, count);
-  }
-
   public startNewRound(): void {
     this.status.set(this.defaultStatus);
 
-    const fourPokemonRefs = this.getXPokemonRefs(this.pokemonRefs(), 4);
+    const pokemonRefsInGen = this.getPokemonRefsInGen(
+      this.pokemonRefs(),
+      this.generation()
+    );
+    const fourPokemonRefs = this.getXPokemonRefs(pokemonRefsInGen, 4);
     const randomIndex = Math.floor(Math.random() * fourPokemonRefs.length);
     const correctPokemonRef = fourPokemonRefs[randomIndex];
 
@@ -58,5 +60,37 @@ export class GameService {
     if (!correctName) return;
     const matches = correctName === option;
     this.status.set(matches ? Status.RevealCorrect : Status.RevealIncorrect);
+    this.score.update((score) => (score = matches ? score + 1 : 0));
+  }
+
+  private getXPokemonRefs(list: PokemonRef[], count: number): PokemonRef[] {
+    return [...list].sort(() => Math.random() - 0.5).slice(0, count);
+  }
+
+  private getPokemonRefsInGen(list: PokemonRef[], generation: Generation) {
+    // First 4 gens only, I only really played up until Diamond/Pearl
+    let minDexEntry: number = 1;
+    let maxDexEntry: number = 493;
+    switch (generation) {
+      case Generation.One:
+        minDexEntry = 1;
+        maxDexEntry = 151;
+        break;
+      case Generation.Two:
+        minDexEntry = 152;
+        maxDexEntry = 251;
+        break;
+      case Generation.Three:
+        minDexEntry = 252;
+        maxDexEntry = 386;
+        break;
+      case Generation.Four:
+        minDexEntry = 387;
+        maxDexEntry = 493;
+        break;
+      default:
+        break;
+    }
+    return list.slice(minDexEntry, maxDexEntry);
   }
 }

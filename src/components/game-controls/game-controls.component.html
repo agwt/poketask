@@ -1,15 +1,21 @@
 <div class="content-box round-result-layout">
-  <p class="game-controls-text">{{ message() }}</p>
-  <button class="content-button new-round" (click)="startNewRound()">
+  <p class="game-controls-text message">{{ message() }}</p>
+  <button
+    class="content-button new-round"
+    [disabled]="guessing()"
+    (click)="startNewRound()"
+  >
     New Round
   </button>
-  <p class="game-controls-text">Caught: {{ score() }}</p>
+  <p class="game-controls-text caught">Caught: {{ score() }}</p>
 </div>
 <div class="content-box score-gen">
   <div>
     @for(generation of generations; track generation) {
     <button
       class="content-button gen-select"
+      [class.selected]="generation === activeGeneration()"
+      [disabled]="guessing() && score() > 0"
       (click)="selectGeneration(generation)"
     >
       {{ getGenerationText(generation) }}

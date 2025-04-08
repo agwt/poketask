@@ -12,9 +12,7 @@ import { GameService } from '../../services/game/game.service';
 export class ChoiceComponent {
   private readonly gameService = inject(GameService);
 
-  public readonly guessing = computed(
-    () => this.gameService.status() === Status.Guess
-  );
+  public readonly guessing = this.gameService.guessing;
   public readonly options = this.gameService.options;
 
   public chooseOption(option: string) {

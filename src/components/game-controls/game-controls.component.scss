@@ -1,7 +1,16 @@
 .game-controls-text {
-    margin-left: 15px;
     color: #000;
     font-size: 20px;
     font-weight: bold;
     font-variant-caps: all-small-caps;
+
+    &.message {
+        margin-left: 15px;
+        min-width: 300px;
+    }
+
+    &.caught {
+        margin-right: 15px;
+        min-width: 110px;
+    }
 }
