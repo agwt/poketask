@@ -34,6 +34,7 @@ export class GameService {
   }
 
   public startNewRound(): void {
+    this.highScore.set(Number(localStorage.getItem('highScore')));
     this.status.set(this.defaultStatus);
 
     const pokemonRefsInGen = this.getPokemonRefsInGen(
@@ -63,6 +64,7 @@ export class GameService {
     this.score.update((score) => (score = matches ? score + 1 : 0));
     const newScore = this.score();
     if (newScore > this.highScore()) this.highScore.set(newScore);
+    localStorage.setItem('highScore', this.highScore().toString());
   }
 
   private getXPokemonRefs(list: PokemonRef[], count: number): PokemonRef[] {
