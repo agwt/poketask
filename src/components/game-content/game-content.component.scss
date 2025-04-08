@@ -19,6 +19,10 @@
     &.blacked-out-display {
         filter: brightness(0);
     }
+
+    &.not-loaded {
+        opacity: 0;
+    }
 }
 
 .title-display {

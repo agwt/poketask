@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { ChoiceComponent } from '../choice/choice.component';
 
 import { GameControlsComponent } from '../game-controls/game-controls.component';
@@ -14,6 +19,12 @@ import { GameService } from '../../services/game/game.service';
 export class GameContentComponent {
   private readonly gameService = inject(GameService);
 
+  public readonly loaded = signal<boolean>(false);
+
   public readonly guessing = this.gameService.guessing;
   public readonly correctPokemon = this.gameService.correctPokemon;
+
+  public markAsLoaded() {
+    this.loaded.set(true);
+  }
 }

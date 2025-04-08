@@ -4,6 +4,8 @@
     [src]="correctPokemon()?.imageUrl"
     class="pokemon-display"
     [class.blacked-out-display]="guessing()"
+    [class.not-loaded]="!loaded()"
+    (load)="markAsLoaded()"
   />
   <app-choice />
 </div>
