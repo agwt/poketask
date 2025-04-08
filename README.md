@@ -1,6 +1,33 @@
-# Poketask
+# Pokemon Guessing Game 
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.6.
+A simple game built using [Angular 19](https://angular.io/) where users guess the name of a hidden Pokemon, similar to the "Who's That Pokemon" segment of the anime.
+
+Other features:
+- TypeScript
+- Signals
+- RxJS
+- SCSS
+
+# Project Structure
+
+├── public/ 
+├── src/ 
+│ ├── app/ 
+│ ├── components/ 
+│ │ ├── choice/ 
+│ │ ├── game-content/ 
+│ │ └── game-controls/ 
+│ ├── enums/ 
+│ │ ├── generation
+│ │ └── status
+│ ├── interfaces/ 
+│ │ └── pokemon
+│ ├── services/ 
+│ │ ├── api # Fetches data from pokeapi
+│ │ └── game # Handles game state
+│ ├── index
+│ ├── main
+│ └── styles
 
 ## Development server
 
