@@ -87,14 +87,15 @@ ng e2e
 
 ## Signals
 This project uses Angular signals to manage the game state. Signals maintain state across components and update reactively - meaning that there is less reliance on RxJS as the application's state is entirely managed and updated through the use of signals.
-State that is managed by signals:
-
+Examples:
+```bash
 List of all fetched Pokemon
-Current Pokemon (correct + fake answers)
-Game status (guessing, correct, incorrect)
+Current Pokemon   (correct + fake answers)
+Game status       # guessing, correct, incorrect
 Generations selected
 Score
-Highscore (then stored in localStorage)
+Highscore         (then stored in localStorage)
+```
 
 ## Screenshots
 
